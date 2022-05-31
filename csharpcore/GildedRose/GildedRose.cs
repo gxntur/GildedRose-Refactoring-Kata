@@ -1,16 +1,24 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 
 namespace GildedRoseKata
 {
     public class GildedRose
     {
-        IList<Item> Items;
+        public IList<BaseItem> BaseItems;
+        public IList<Item> Items;
+
+        public GildedRose(IList<BaseItem> BaseItems)
+        {
+            this.BaseItems = BaseItems;
+        }
+
         public GildedRose(IList<Item> Items)
         {
             this.Items = Items;
         }
 
-        public void UpdateQuality()
+        public void UpdateQualityObsolete()
         {
             for (var i = 0; i < Items.Count; i++)
             {
@@ -83,6 +91,15 @@ namespace GildedRoseKata
                         }
                     }
                 }
+            }
+        }
+
+        public void UpdateQuality()
+        {
+            for (var i = 0; i < BaseItems.Count; i++)
+            {
+                var item = BaseItems[i];
+                item.UpdateQuality();
             }
         }
     }
